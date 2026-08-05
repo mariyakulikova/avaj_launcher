@@ -14,6 +14,8 @@ public class AircraftFactory {
     }
 
     public Flyable newAircraft(String type, String name, Coordinates coordinates) {
-
+        throw new UnsupportedOperationException(
+                "Aircraft creation is not implemented yet"
+        );
     }
 }

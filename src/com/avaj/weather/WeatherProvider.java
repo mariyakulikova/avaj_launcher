@@ -3,11 +3,16 @@ package com.avaj.weather;
 import com.avaj.aircraft.Coordinates;
 
 public class WeatherProvider {
-    private String[] weather;
+    private final String[] weather;
     private static WeatherProvider instance;
 
-    private WeatherProvider(String[] weather) {
-        this.weather = weather;
+    private WeatherProvider() {
+        this.weather = new String[]{
+                "RAIN",
+                "FOG",
+                "SNOW",
+                "SUN",
+        };
     }
 
     public static WeatherProvider getInstance() {
@@ -18,6 +23,6 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
-        return "";
+        return this.weather[0];
     }
 }
