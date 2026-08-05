@@ -1,9 +1,9 @@
 package com.avaj.aircraft;
 
-public class Coordinates {
-    private int longitude;
-    private int latitude;
-    private int height;
+public final class Coordinates {
+    private final int longitude;
+    private final int latitude;
+    private final int height;
 
     Coordinates(int longitude, int latitude, int height) {
         this.longitude = longitude;
