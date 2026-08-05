@@ -10,8 +10,8 @@ public class WeatherProvider {
         this.weather = new String[]{
                 "RAIN",
                 "FOG",
-                "SNOW",
                 "SUN",
+                "SNOW",
         };
     }
 
@@ -23,6 +23,14 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
-        return this.weather[0];
+        if (coordinates == null) throw new IllegalArgumentException("Coordinates cannot be null");
+
+        long weatherCode = coordinates.getLongitude()
+                         + 2L * coordinates.getLatitude()
+                         + 3L * coordinates.getHeight();
+
+        int index = Math.floorMod(weatherCode, weather.length);
+
+        return weather[index];
     }
 }
