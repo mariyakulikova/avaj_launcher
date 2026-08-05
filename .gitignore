@@ -3,6 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
+.idea/
 
 ### Eclipse ###
 .apt_generated
@@ -28,3 +29,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+sources.txt
+simulation.txt
+*.iml
+*.class
