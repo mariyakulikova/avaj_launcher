@@ -7,6 +7,16 @@ public class Helicopter extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = getCurrentWeather();
 
+        switch (weather) {
+            case "SUN" -> move(10, 0, 2);
+            case "RAIN" -> move(5, 0, 0);
+            case "FOG" -> move(1, 0, 0);
+            case "SNOW" -> move(0, 0, -12);
+            default -> throw new IllegalStateException(
+                    "Unknown weather: " + weather
+            );
+        }
     }
 }

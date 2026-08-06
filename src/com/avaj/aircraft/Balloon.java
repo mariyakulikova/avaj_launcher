@@ -7,6 +7,16 @@ public class Balloon extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = getCurrentWeather();
 
+        switch (weather) {
+            case "SUN" -> move(2, 0, 4);
+            case "RAIN" -> move(0, 0, -5);
+            case "FOG" -> move(0, 0, -3);
+            case "SNOW" -> move(0, 0, -15);
+            default -> throw new IllegalStateException(
+                    "Unknown weather: " + weather
+            );
+        }
     }
 }

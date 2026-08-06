@@ -7,6 +7,16 @@ public class JetPlane extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = getCurrentWeather();
 
+        switch (weather) {
+            case "SUN" -> move(0, 10, 2);
+            case "RAIN" -> move(0, 5, 0);
+            case "FOG" -> move(0, 1, 0);
+            case "SNOW" -> move(0, 0, -7);
+            default -> throw new IllegalStateException(
+                    "Unknown weather: " + weather
+            );
+        }
     }
 }
