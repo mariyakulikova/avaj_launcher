@@ -28,4 +28,10 @@ public class AircraftFactory {
         this.nextId += 1;
         return flyable;
     }
+
+    public Flyable newAircraft(String type, String name, int longitude, int latitude, int height) {
+        Coordinates coordinates = new Coordinates(longitude, latitude, height);
+
+        return newAircraft(type, name, coordinates);
+    }
 }

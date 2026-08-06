@@ -36,6 +36,8 @@ public class Aircraft extends Flyable{
         return weatherTower.getWeather(coordinates);
     }
 
+
+
     @Override
     public void updateConditions() {
 
