@@ -10,10 +10,10 @@ public class Balloon extends Aircraft {
         String weather = getCurrentWeather();
 
         switch (weather) {
-            case "SUN" -> move(2, 0, 4);
-            case "RAIN" -> move(0, 0, -5);
-            case "FOG" -> move(0, 0, -3);
-            case "SNOW" -> move(0, 0, -15);
+            case "SUN" -> react("SUN", 2, 0, 4);
+            case "RAIN" -> react("RAIN", 0, 0, -5);
+            case "FOG" -> react("FOG", 0, 0, -3);
+            case "SNOW" -> react("SNOW", 0, 0, -15);
             default -> throw new IllegalStateException(
                     "Unknown weather: " + weather
             );

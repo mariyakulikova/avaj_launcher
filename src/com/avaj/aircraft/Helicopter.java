@@ -10,10 +10,10 @@ public class Helicopter extends Aircraft {
         String weather = getCurrentWeather();
 
         switch (weather) {
-            case "SUN" -> move(10, 0, 2);
-            case "RAIN" -> move(5, 0, 0);
-            case "FOG" -> move(1, 0, 0);
-            case "SNOW" -> move(0, 0, -12);
+            case "SUN" -> react("SUN", 10, 0, 2);
+            case "RAIN" -> react("RAIN", 5, 0, 0);
+            case "FOG" -> react("FOG", 1, 0, 0);
+            case "SNOW" -> react("SNOW", 0, 0, -12);
             default -> throw new IllegalStateException(
                     "Unknown weather: " + weather
             );

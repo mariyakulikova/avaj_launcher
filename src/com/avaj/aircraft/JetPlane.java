@@ -10,10 +10,10 @@ public class JetPlane extends Aircraft {
         String weather = getCurrentWeather();
 
         switch (weather) {
-            case "SUN" -> move(0, 10, 2);
-            case "RAIN" -> move(0, 5, 0);
-            case "FOG" -> move(0, 1, 0);
-            case "SNOW" -> move(0, 0, -7);
+            case "SUN" -> react("SUN",0, 10, 2);
+            case "RAIN" -> react("RAIN",0, 5, 0);
+            case "FOG" -> react("FOG",0, 1, 0);
+            case "SNOW" -> react("SNOW",0, 0, -7);
             default -> throw new IllegalStateException(
                     "Unknown weather: " + weather
             );

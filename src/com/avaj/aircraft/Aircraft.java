@@ -1,5 +1,7 @@
 package com.avaj.aircraft;
 
+import com.avaj.logger.SimulationLogger;
+
 public class Aircraft extends Flyable{
     protected final long id;
     protected final String name;
@@ -22,6 +24,9 @@ public class Aircraft extends Flyable{
         coordinates = new Coordinates(newLongitude, newLatitude, newHeight);
 
         if (newHeight == 0) {
+            SimulationLogger.getInstance().log(
+                    this + " landing."
+            );
             weatherTower.unregister(this);
         }
     }
@@ -36,10 +41,21 @@ public class Aircraft extends Flyable{
         return weatherTower.getWeather(coordinates);
     }
 
+    protected void react(String msg, int longitudeDelta, int latitudeDelta, int heightDelta) {
+        SimulationLogger.getInstance().log(
+                this + ": " + msg
+        );
 
+        move(longitudeDelta, latitudeDelta, heightDelta);
+    }
 
     @Override
     public void updateConditions() {
 
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "#" + name + "(" + id + ")";
     }
 }
