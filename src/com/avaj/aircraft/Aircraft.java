@@ -15,7 +15,7 @@ public class Aircraft extends Flyable{
         this.coordinates = coordinates;
     }
 
-    protected void move(int longitudeDelta, int latitudeDelta, int heightDelta) {
+    private void move(int longitudeDelta, int latitudeDelta, int heightDelta) {
         int newLongitude = coordinates.getLongitude() + longitudeDelta;
         int newLatitude = coordinates.getLatitude() + latitudeDelta;
         int newHeight = coordinates.getHeight() + heightDelta;
