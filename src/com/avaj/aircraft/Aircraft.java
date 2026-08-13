@@ -3,6 +3,8 @@ package com.avaj.aircraft;
 import com.avaj.logger.SimulationLogger;
 
 public class Aircraft extends Flyable{
+    private static final int MAX_HEIGHT = 100;
+    private static final int GROUND_HEIGHT = 0;
     protected final long id;
     protected final String name;
     protected Coordinates coordinates;
@@ -18,8 +20,8 @@ public class Aircraft extends Flyable{
         int newLatitude = coordinates.getLatitude() + latitudeDelta;
         int newHeight = coordinates.getHeight() + heightDelta;
 
-        newHeight = Math.min(100, newHeight);
-        newHeight = Math.max(0, newHeight);
+        newHeight = Math.min(MAX_HEIGHT, newHeight);
+        newHeight = Math.max(GROUND_HEIGHT, newHeight);
 
         coordinates = new Coordinates(newLongitude, newLatitude, newHeight);
 
