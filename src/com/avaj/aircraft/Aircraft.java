@@ -16,14 +16,20 @@ public class Aircraft extends Flyable{
     }
 
     private void move(int longitudeDelta, int latitudeDelta, int heightDelta) {
-        int newLongitude = coordinates.getLongitude() + longitudeDelta;
-        int newLatitude = coordinates.getLatitude() + latitudeDelta;
+        long newLongitude = (long)coordinates.getLongitude() + longitudeDelta;
+        long newLatitude = (long)coordinates.getLatitude() + latitudeDelta;
         int newHeight = coordinates.getHeight() + heightDelta;
+
+        if (newLongitude <= 0 || newLongitude > Integer.MAX_VALUE || newLatitude <= 0 || newLatitude > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(
+                    "Aircraft coordinates are out of range"
+            );
+        }
 
         newHeight = Math.min(MAX_HEIGHT, newHeight);
         newHeight = Math.max(GROUND_HEIGHT, newHeight);
 
-        coordinates = new Coordinates(newLongitude, newLatitude, newHeight);
+        coordinates = new Coordinates((int)newLongitude, (int)newLatitude, newHeight);
 
         if (newHeight == 0) {
             SimulationLogger.getInstance().log(
