@@ -1,5 +1,7 @@
 package com.avaj.aircraft;
 
+import com.avaj.exception.AircraftCreationException;
+
 public class AircraftFactory {
 
     private static AircraftFactory instance;
@@ -15,7 +17,9 @@ public class AircraftFactory {
     }
 
     public Flyable newAircraft(String type, String name, Coordinates coordinates) {
-        if (type == null) throw new IllegalArgumentException("Aircraft type is null");
+        if (type == null) {
+            throw new AircraftCreationException("Aircraft type is null");
+        }
         Flyable flyable;
         long id = nextId;
 
@@ -23,7 +27,7 @@ public class AircraftFactory {
             case "JetPlane" -> new JetPlane(id, name, coordinates);
             case "Balloon" -> new Balloon(id, name, coordinates);
             case "Helicopter" -> new Helicopter(id, name, coordinates);
-            default -> throw new IllegalArgumentException("Unknown aircraft type: " + type);
+            default -> throw new AircraftCreationException("Unknown aircraft type: " + type);
         };
         this.nextId += 1;
         return flyable;

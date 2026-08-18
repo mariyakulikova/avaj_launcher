@@ -1,8 +1,9 @@
 package com.avaj.logger;
 
+import com.avaj.exception.SimulationLoggerException;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +25,7 @@ public final class SimulationLogger implements AutoCloseable {
 
     public static SimulationLogger open(Path outputPath) throws IOException {
         if (instance != null) {
-            throw new IllegalStateException("Simulation logger is already open");
+            throw new SimulationLoggerException("Simulation logger is already open");
         }
 
         instance = new SimulationLogger(outputPath);
@@ -33,7 +34,7 @@ public final class SimulationLogger implements AutoCloseable {
 
     public static SimulationLogger getInstance() {
         if (instance == null) {
-            throw new IllegalStateException("Simulation logger is not open");
+            throw new SimulationLoggerException("Simulation logger is not open");
         }
 
         return instance;
@@ -44,7 +45,7 @@ public final class SimulationLogger implements AutoCloseable {
             writer.write(msg);
             writer.newLine();
         } catch (IOException e) {
-            throw new UncheckedIOException("Cannot write simulation log", e);
+            throw new SimulationLoggerException("Cannot write simulation log", e);
         }
     }
 

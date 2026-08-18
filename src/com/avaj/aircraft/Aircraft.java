@@ -1,5 +1,6 @@
 package com.avaj.aircraft;
 
+import com.avaj.exception.AircraftStateException;
 import com.avaj.logger.SimulationLogger;
 
 public class Aircraft extends Flyable{
@@ -21,7 +22,7 @@ public class Aircraft extends Flyable{
         int newHeight = coordinates.getHeight() + heightDelta;
 
         if (newLongitude <= 0 || newLongitude > Integer.MAX_VALUE || newLatitude <= 0 || newLatitude > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(
+            throw new AircraftStateException(
                     "Aircraft coordinates are out of range"
             );
         }
@@ -41,7 +42,7 @@ public class Aircraft extends Flyable{
 
     protected String getCurrentWeather() {
         if (weatherTower == null) {
-            throw new IllegalStateException(
+            throw new AircraftStateException(
                     "Aircraft is not registered to a weather tower"
             );
         }
@@ -58,9 +59,7 @@ public class Aircraft extends Flyable{
     }
 
     @Override
-    public void updateConditions() {
-
-    }
+    public void updateConditions() {}
 
     @Override
     public String toString() {

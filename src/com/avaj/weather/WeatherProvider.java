@@ -23,7 +23,9 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
-        if (coordinates == null) throw new IllegalArgumentException("Coordinates cannot be null");
+        if (coordinates == null) {
+            throw new IllegalArgumentException("Coordinates cannot be null");
+        }
 
         long weatherCode = coordinates.getLongitude()
                          + 2L * coordinates.getLatitude()

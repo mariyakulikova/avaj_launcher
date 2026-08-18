@@ -1,5 +1,7 @@
 package com.avaj.aircraft;
 
+import com.avaj.exception.WeatherException;
+
 public class Helicopter extends Aircraft {
     private static final String SUN_MSG = "Clear skies and happy rotors! ☀\uFE0F\uD83D\uDE81";
     private static final String RAIN_MSG = "The rain is hammering my rotor! \uD83C\uDF27\uFE0F\uD83D\uDE81";
@@ -19,7 +21,7 @@ public class Helicopter extends Aircraft {
             case "RAIN" -> react(RAIN_MSG, 5, 0, 0);
             case "FOG" -> react(FOG_MSG, 1, 0, 0);
             case "SNOW" -> react(SNOW_MSG, 0, 0, -12);
-            default -> throw new IllegalStateException(
+            default -> throw new WeatherException(
                     "Unknown weather: " + weather
             );
         }

@@ -2,6 +2,7 @@ package com.avaj.simulator;
 
 import com.avaj.aircraft.AircraftFactory;
 import com.avaj.aircraft.Flyable;
+import com.avaj.exception.AvajException;
 import com.avaj.logger.SimulationLogger;
 import com.avaj.simulator.scenario.AircraftSpec;
 import com.avaj.simulator.scenario.Scenario;
@@ -9,7 +10,6 @@ import com.avaj.simulator.scenario.ScenarioParser;
 import com.avaj.tower.WeatherTower;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Path;
 
 public class Simulator {
@@ -26,7 +26,7 @@ public class Simulator {
                 run(scenario);
             }
 
-        } catch (IOException | IllegalArgumentException | UncheckedIOException e) {
+        } catch (IOException | AvajException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }

@@ -1,5 +1,7 @@
 package com.avaj.simulator.scenario;
 
+import com.avaj.exception.ScenarioException;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,7 +19,7 @@ public final class ScenarioParser {
         );
 
         if (lines.isEmpty()) {
-            throw new IllegalArgumentException("Scenario file is empty");
+            throw new ScenarioException("Scenario file is empty");
         }
 
         int simulationCount;
@@ -27,11 +29,14 @@ public final class ScenarioParser {
                     lines.getFirst().trim()
             );
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("Line 1: simulation count must be an integer");
+            throw new ScenarioException(
+                    "Line 1: simulation count must be an integer",
+                    exception
+            );
         }
 
         if (simulationCount <= 0) {
-            throw new IllegalArgumentException("Line 1: simulation count must be positive");
+            throw new ScenarioException("Line 1: simulation count must be positive");
         }
 
         List<AircraftSpec> aircraft = new ArrayList<>();
@@ -41,13 +46,13 @@ public final class ScenarioParser {
             String line = lines.get(index).trim();
 
             if (line.isEmpty()) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": line is empty");
+                throw new ScenarioException("Line " + lineNumber + ": line is empty");
             }
 
             String[] parts = line.split("\\s+");
 
             if (parts.length != 5) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": expected 5 values, found " + parts.length);
+                throw new ScenarioException("Line " + lineNumber + ": expected 5 values, found " + parts.length);
             }
 
             String type = parts[0];
@@ -59,7 +64,7 @@ public final class ScenarioParser {
             };
 
             if (!supportedType) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": unknown aircraft type: " + type);
+                throw new ScenarioException("Line " + lineNumber + ": unknown aircraft type: " + type);
             }
 
             int longitude;
@@ -71,19 +76,22 @@ public final class ScenarioParser {
                 latitude = Integer.parseInt(parts[3]);
                 height = Integer.parseInt(parts[4]);
             } catch (NumberFormatException exception) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": coordinates must be integers");
+                throw new ScenarioException(
+                        "Line " + lineNumber + ": coordinates must be integers",
+                        exception
+                );
             }
 
             if (longitude <= 0) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": longitude must be positive");
+                throw new ScenarioException("Line " + lineNumber + ": longitude must be positive");
             }
 
             if (latitude <= 0) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": latitude must be positive");
+                throw new ScenarioException("Line " + lineNumber + ": latitude must be positive");
             }
 
             if (height <= 0 || height > 100) {
-                throw new IllegalArgumentException("Line " + lineNumber + ": height must be between 1 and 100");
+                throw new ScenarioException("Line " + lineNumber + ": height must be between 1 and 100");
             }
 
             AircraftSpec spec = new AircraftSpec(type, name, longitude, latitude, height);
