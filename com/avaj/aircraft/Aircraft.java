@@ -3,7 +3,7 @@ package com.avaj.aircraft;
 import com.avaj.exception.AircraftStateException;
 import com.avaj.logger.SimulationLogger;
 
-public class Aircraft extends Flyable{
+public abstract class Aircraft extends Flyable{
     private static final int MAX_HEIGHT = 100;
     private static final int GROUND_HEIGHT = 0;
     protected final long id;
@@ -57,9 +57,6 @@ public class Aircraft extends Flyable{
 
         move(longitudeDelta, latitudeDelta, heightDelta);
     }
-
-    @Override
-    public void updateConditions() {}
 
     @Override
     public String toString() {
